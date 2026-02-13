@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Sefira</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #0d0a0e;
+      min-height: 100vh;
+      color: #e8d5e0;
+      overflow-x: hidden;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(120, 20, 60, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(180, 40, 80, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(90, 10, 50, 0.12) 0%, transparent 50%),
+        linear-gradient(180deg, #0d0a0e 0%, #150d14 50%, #1a0f18 100%);
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.1; transform: scale(0.8); }
+      100% { opacity: 0.7; transform: scale(1.2); }
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      opacity: 0.06;
+      animation: floatUp linear infinite;
+      color: #e91e63;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(1);
+        opacity: 0;
+      }
+      10% { opacity: 0.06; }
+      90% { opacity: 0.06; }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Music Toggle */
+    .music-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 100;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(233, 30, 99, 0.2);
+      background: rgba(20, 12, 18, 0.7);
+      backdrop-filter: blur(16px);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+      color: #e8a0b8;
+    }
+
+    .music-toggle:hover {
+      border-color: rgba(233, 30, 99, 0.4);
+      transform: scale(1.08);
+      box-shadow: 0 4px 24px rgba(233, 30, 99, 0.15);
+    }
+
+    .music-toggle.playing {
+      border-color: rgba(233, 30, 99, 0.5);
+      box-shadow: 0 0 20px rgba(233, 30, 99, 0.2);
+      animation: musicPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes musicPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(233, 30, 99, 0.15); }
+      50% { box-shadow: 0 0 30px rgba(233, 30, 99, 0.3); }
+    }
+
+    /* Landing */
+    #landing {
+      min-height: 100vh;
+    }
+
+    #landing .decorative-line {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(233, 30, 99, 0.5), transparent);
+      margin: 0 auto 32px;
+    }
+
+    #landing h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: #f8c8d8;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      text-shadow: 0 0 60px rgba(233, 30, 99, 0.2);
+    }
+
+    #landing .subtitle {
+      font-size: 1rem;
+      color: rgba(232, 180, 200, 0.6);
+      font-weight: 300;
+      margin-bottom: 48px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 48px;
+      border: 1px solid rgba(233, 30, 99, 0.3);
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      color: #f8c8d8;
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.15), rgba(180, 20, 70, 0.2));
+      box-shadow: 0 4px 24px rgba(233, 30, 99, 0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 36px rgba(233, 30, 99, 0.25);
+      border-color: rgba(233, 30, 99, 0.5);
+      background: linear-gradient(135deg, rgba(233, 30, 99, 0.25), rgba(180, 20, 70, 0.3));
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Heart Game */
+    .game-area {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 450px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 28px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      border: 1px solid rgba(233, 30, 99, 0.12);
+      cursor: pointer;
+      touch-action: manipulation;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .game-stat {
+      background: rgba(233, 30, 99, 0.12);
+      border: 1px solid rgba(233, 30, 99, 0.15);
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f8c8d8;
+      letter-spacing: 0.5px;
+    }
+
+    .falling-heart {
+      position: absolute;
+      font-size: 32px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s ease;
+      z-index: 3;
+      filter: drop-shadow(0 0 8px rgba(233, 30, 99, 0.3));
+    }
+
+    .falling-heart:active {
+      transform: scale(1.3);
+    }
+
+    .heart-pop {
+      animation: pop 0.3s ease forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 8px rgba(233, 30, 99, 0.3)); }
+      50% { transform: scale(1.6); opacity: 0.5; filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.6)); }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    .game-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: #f8c8d8;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .game-instruction {
+      font-size: 0.9rem;
+      color: rgba(232, 180, 200, 0.5);
+      margin-bottom: 28px;
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.5px;
+    }
+
+    .game-result {
+      display: none;
+      margin-top: 28px;
+    }
+
+    .game-result h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      color: #f8c8d8;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    .game-result p {
+      font-size: 0.9rem;
+      color: rgba(232, 180, 200, 0.5);
+      margin-bottom: 28px;
+    }
+
+    .score-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: #e91e63;
+      margin-bottom: 8px;
+      text-shadow: 0 0 30px rgba(233, 30, 99, 0.3);
+    }
+
+    .progress-bar {
+      width: 100%;
+      max-width: 400px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 14px auto 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #e91e63, #f06292);
+      border-radius: 2px;
+      transition: width 0.3s linear;
+      box-shadow: 0 0 10px rgba(233, 30, 99, 0.4);
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 40px 32px;
+      border: 1px solid rgba(233, 30, 99, 0.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: #f8c8d8;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    /* Quiz */
+    .question-block {
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .question-block:last-of-type {
+      margin-bottom: 36px;
+    }
+
+    .question-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(248, 200, 216, 0.8);
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(233, 30, 99, 0.08);
+      font-size: 0.9rem;
+      color: rgba(232, 200, 215, 0.7);
+    }
+
+    .option-label:hover {
+      background: rgba(233, 30, 99, 0.06);
+      border-color: rgba(233, 30, 99, 0.15);
+      color: #f8c8d8;
+    }
+
+    .option-label input[type="radio"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(233, 30, 99, 0.25);
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    .option-label input[type="radio"]:checked {
+      border-color: #e91e63;
+      background: #e91e63;
+      box-shadow: 0 0 12px rgba(233, 30, 99, 0.3);
+    }
+
+    .option-label input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .option-label:has(input:checked) {
+      background: rgba(233, 30, 99, 0.08);
+      border-color: rgba(233, 30, 99, 0.25);
+      color: #f8c8d8;
+    }
+
+    .quiz-result {
+      display: none;
+      text-align: center;
+    }
+
+    .quiz-result-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: #f8c8d8;
+      font-weight: 300;
+      line-height: 1.9;
+      margin-bottom: 32px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Truth */
+    .truth-subtitle {
+      font-size: 0.9rem;
+      color: rgba(232, 180, 200, 0.5);
+      margin-bottom: 28px;
+      font-weight: 300;
+      margin-top: -16px;
+      letter-spacing: 0.5px;
+    }
+
+    .truth-input {
+      width: 100%;
+      padding: 18px 22px;
+      border: 1px solid rgba(233, 30, 99, 0.15);
+      border-radius: 18px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.04);
+      color: #f8c8d8;
+      outline: none;
+      transition: all 0.4s ease;
+      margin-bottom: 24px;
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .truth-input::placeholder {
+      color: rgba(232, 180, 200, 0.25);
+    }
+
+    .truth-input:focus {
+      border-color: rgba(233, 30, 99, 0.35);
+      box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.06), 0 0 30px rgba(233, 30, 99, 0.08);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .truth-response {
+      display: none;
+      margin-top: 28px;
+      padding: 24px;
+      background: rgba(233, 30, 99, 0.06);
+      border-radius: 18px;
+      border: 1px solid rgba(233, 30, 99, 0.1);
+    }
+
+    .truth-response p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #f8c8d8;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* Photo */
+    .photo-section {
+      text-align: center;
+    }
+
+    .photo-frame {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      margin: 0 auto 28px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(233, 30, 99, 0.15) 0%, rgba(233, 30, 99, 0.05) 40%, transparent 70%);
+      animation: glow 4s ease-in-out infinite alternate;
+    }
+
+    .photo-ring {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      border: 1px solid rgba(233, 30, 99, 0.15);
+      animation: ringRotate 20s linear infinite;
+    }
+
+    .photo-ring::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: #e91e63;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(233, 30, 99, 0.6);
+    }
+
+    @keyframes ringRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes glow {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.12); opacity: 1; }
+    }
+
+    .photo-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(233, 30, 99, 0.2);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 40px rgba(233, 30, 99, 0.15), 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .photo-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: #f8c8d8;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .photo-subcaption {
+      font-size: 0.8rem;
+      color: rgba(232, 180, 200, 0.4);
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .final-message {
+      margin-top: 48px;
+      padding: 36px 28px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(233, 30, 99, 0.08);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+    }
+
+    .final-message p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: rgba(248, 200, 216, 0.75);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 2;
+      letter-spacing: 0.5px;
+    }
+
+    .final-heart {
+      font-size: 2.5rem;
+      margin-top: 20px;
+      display: inline-block;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(233, 30, 99, 0.4));
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.12); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.08); }
+    }
+
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(233, 30, 99, 0.3), transparent);
+      margin: 24px auto;
+    }
+
+    /* Secret panel */
+    .secret-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 10, 14, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 200;
+      overflow-y: auto;
+      padding: 40px 24px;
+    }
+
+    .secret-panel.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .secret-content {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .secret-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: #f8c8d8;
+      font-weight: 300;
+      margin-bottom: 24px;
+    }
+
+    .secret-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(233, 30, 99, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .secret-item .label {
+      font-size: 0.7rem;
+      color: rgba(232, 180, 200, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .secret-item .value {
+      font-size: 1rem;
+      color: #f8c8d8;
+      line-height: 1.6;
+    }
+
+    .secret-close {
+      margin-top: 24px;
+      padding: 12px 36px;
+      border: 1px solid rgba(233, 30, 99, 0.2);
+      border-radius: 50px;
+      background: transparent;
+      color: #f8c8d8;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .secret-close:hover {
+      border-color: rgba(233, 30, 99, 0.4);
+      background: rgba(233, 30, 99, 0.06);
+    }
+
+    .no-data {
+      color: rgba(232, 180, 200, 0.3);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+      #landing h1 {
+        font-size: 2.8rem;
+      }
+
+      .game-area {
+        height: 380px;
+      }
+
+      .card {
+        padding: 32px 22px;
+      }
+
+      .photo-frame {
+        width: 180px;
+        height: 180px;
+      }
+
+      .photo-img {
+        width: 180px;
+        height: 180px;
+      }
+
+      .photo-glow {
+        width: 230px;
+        height: 230px;
+      }
+
+      .photo-ring {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+  <div class="stars" id="stars"></div>
+  <div class="floating-hearts" id="floatingHearts"></div>
+
+  <!-- Music Toggle -->
+  <button class="music-toggle" id="musicToggle" title="Toggle Music">&#9835;</button>
+
+  <!-- Section 1: Landing -->
+  <section id="landing">
+    <div class="container fade-in">
+      <div class="decorative-line"></div>
+      <h1>Hi Sefira &#10084;&#65039;</h1>
+      <p class="subtitle">I made something small for you.</p>
+      <button class="btn" onclick="scrollToSection('heart-game')">Start</button>
+    </div>
+  </section>
+
+  <!-- Section 2: Heart Catch Game -->
+  <section id="heart-game">
+    <div class="container fade-in">
+      <div id="gameIntro">
+        <h2 class="game-title">Catch My Hearts</h2>
+        <p class="game-instruction">Tap the falling hearts before they disappear.<br>You have 25 seconds.</p>
+        <button class="btn" onclick="startGame()">Play</button>
+      </div>
+
+      <div id="gamePlay" class="hidden">
+        <div class="game-area" id="gameArea">
+          <div class="game-header">
+            <div class="game-stat" id="scoreDisplay">&#10084; 0</div>
+            <div class="game-stat" id="timerDisplay">25s</div>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressBar" style="width: 100%"></div>
+        </div>
+      </div>
+
+      <div class="game-result" id="gameResult">
+        <div class="score-display" id="finalScore">0</div>
+        <h3 id="gameMessage"></h3>
+        <p id="gameSubMessage"></p>
+        <button class="btn" onclick="scrollToSection('quiz')">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Mini Quiz -->
+  <section id="quiz">
+    <div class="container fade-in">
+      <div class="card" id="quizForm">
+        <h2 class="card-title">A Little Quiz &#128156;</h2>
+
+        <div class="question-block">
+          <p class="question-text">1. Who overthinks more?</p>
+          <div class="options">
+            <label class="option-label">
+              <input type="radio" name="q1" value="me"> Me, obviously
+            </label>
+            <label class="option-label">
+              <input type="radio" name="q1" value="you"> You, for sure
+            </label>
+            <label class="option-label">
+              <input type="radio" name="q1" value="both"> We both do
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <p class="question-text">2. Who would win an argument?</p>
+          <div class="options">
+            <label class="option-label">
+              <input type="radio" name="q2" value="me"> Me, I never lose
+            </label>
+            <label class="option-label">
+              <input type="radio" name="q2" value="you"> You, you're too convincing
+            </label>
+            <label class="option-label">
+              <input type="radio" name="q2" value="nobody"> Nobody, we'd just laugh
+            </label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <p class="question-text">3. What would our perfect day look like?</p>
+          <div class="options">
+            <label class="option-label">
+              <input type="radio" name="q3" value="chill"> Just staying in & talking for hours
+            </label>
+            <label class="option-label">
+              <input type="radio" name="q3" value="adventure"> Going on a random adventure
+            </label>
+            <label class="option-label">
+              <input type="radio" name="q3" value="food"> Food, lots of food together
+            </label>
+          </div>
+        </div>
+
+        <button class="btn" onclick="submitQuiz()">Submit</button>
+      </div>
+
+      <div class="quiz-result" id="quizResult">
+        <div class="card">
+          <p class="quiz-result-text">No matter what you answered...<br><br>I really like talking to you &#10084;&#65039;</p>
+          <button class="btn" onclick="scrollToSection('truth')">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Truth -->
+  <section id="truth">
+    <div class="container fade-in">
+      <div class="card">
+        <h2 class="card-title">Truth Time</h2>
+        <p class="truth-subtitle">Ask me one thing you've always wanted to know.</p>
+        <textarea class="truth-input" id="truthInput" placeholder="Type your question here..." rows="3"></textarea>
+        <br>
+        <button class="btn" onclick="submitTruth()" id="truthBtn">Ask Me</button>
+        <div class="truth-response" id="truthResponse">
+          <p>I promise to answer honestly. &#128149;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Photo -->
+  <section id="photo">
+    <div class="container fade-in">
+      <div class="photo-section">
+        <div class="photo-frame">
+          <div class="photo-glow"></div>
+          <div class="photo-ring"></div>
+          <img class="photo-img" src="https://placehold.co/400x400/1a0f18/e91e63?text=You Did not answered" alt="Sefira">
+        </div>
+        <p class="photo-caption">You &#128149;</p>
+        <p class="photo-subcaption">the reason I made all of this</p>
+
+        <div class="final-message">
+          <div class="divider"></div>
+          <p>This isn't much, but every little piece of it was made thinking of you. You make the ordinary feel like something worth remembering.</p>
+          <div class="final-heart">&#10084;&#65039;</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Secret Panel (for you to see her answers) -->
+  <div class="secret-panel" id="secretPanel">
+    <div class="secret-content">
+      <h2>Her Responses</h2>
+      <div id="secretData"></div>
+      <button class="secret-close" onclick="closeSecret()">Close</button>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="https://cdn.pixabay.com/audio/2024/11/29/audio_d0e737adfd.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Stars background
+    (function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 60; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDuration = (2 + Math.random() * 4) + 's';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        const size = 1 + Math.random() * 2;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        container.appendChild(star);
+      }
+    })();
+
+    // Floating hearts
+    (function createFloatingHearts() {
+      const container = document.getElementById('floatingHearts');
+      const hearts = ['\u2764\uFE0F', '\uD83D\uDC95', '\uD83D\uDC97', '\uD83D\uDC9C', '\uD83D\uDC93'];
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (10 + Math.random() * 15) + 's';
+        heart.style.animationDelay = Math.random() * 12 + 's';
+        heart.style.fontSize = (14 + Math.random() * 14) + 'px';
+        container.appendChild(heart);
+      }
+    })();
+
+    // Fade-in observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Music toggle
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+    let musicPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (musicPlaying) {
+        music.pause();
+        musicBtn.classList.remove('playing');
+      } else {
+        music.volume = 0.25;
+        music.play().catch(() => {});
+        musicBtn.classList.add('playing');
+      }
+      musicPlaying = !musicPlaying;
+    });
+
+    // Heart Catch Game
+    let score = 0;
+    let timeLeft = 25;
+    let gameInterval = null;
+    let spawnInterval = null;
+    let gameRunning = false;
+
+    function startGame() {
+      score = 0;
+      timeLeft = 25;
+      gameRunning = true;
+
+      document.getElementById('gameIntro').classList.add('hidden');
+      document.getElementById('gamePlay').classList.remove('hidden');
+      document.getElementById('gameResult').style.display = 'none';
+      document.getElementById('scoreDisplay').innerHTML = '\u2764 0';
+      document.getElementById('timerDisplay').textContent = '25s';
+      document.getElementById('progressBar').style.width = '100%';
+
+      const gameArea = document.getElementById('gameArea');
+      gameArea.querySelectorAll('.falling-heart').forEach(h => h.remove());
+
+      spawnInterval = setInterval(spawnHeart, 650);
+
+      gameInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timerDisplay').textContent = timeLeft + 's';
+        document.getElementById('progressBar').style.width = ((timeLeft / 25) * 100) + '%';
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+    }
+
+    function spawnHeart() {
+      if (!gameRunning) return;
+
+      const gameArea = document.getElementById('gameArea');
+      const areaRect = gameArea.getBoundingClientRect();
+      const heart = document.createElement('div');
+      heart.className = 'falling-heart';
+
+      const heartTypes = ['\u2764\uFE0F', '\uD83D\uDC95', '\uD83D\uDC97', '\uD83D\uDC96', '\uD83D\uDC93'];
+      heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+
+      const maxLeft = areaRect.width - 50;
+      heart.style.left = (20 + Math.random() * (maxLeft - 20)) + 'px';
+      heart.style.top = '-40px';
+
+      const sizes = [28, 32, 36, 42];
+      heart.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)] + 'px';
+
+      function catchHeart(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        if (!gameRunning) return;
+        score++;
+        document.getElementById('scoreDisplay').innerHTML = '\u2764 ' + score;
+        heart.classList.add('heart-pop');
+        setTimeout(() => heart.remove(), 300);
+      }
+
+      heart.addEventListener('click', catchHeart);
+      heart.addEventListener('touchstart', catchHeart, { passive: false });
+
+      gameArea.appendChild(heart);
+
+      const fallDuration = 2200 + Math.random() * 1500;
+      const fallDistance = areaRect.height + 60;
+      let startTime = null;
+
+      function animateFall(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / fallDuration, 1);
+        const swayAmount = Math.sin(progress * Math.PI * 3) * 18;
+
+        heart.style.top = (-40 + progress * fallDistance) + 'px';
+        heart.style.transform = 'translateX(' + swayAmount + 'px) rotate(' + (progress * 200) + 'deg)';
+
+        if (progress < 1 && heart.parentElement) {
+          requestAnimationFrame(animateFall);
+        } else if (heart.parentElement) {
+          heart.remove();
+        }
+      }
+
+      requestAnimationFrame(animateFall);
+    }
+
+    function endGame() {
+      gameRunning = false;
+      clearInterval(gameInterval);
+      clearInterval(spawnInterval);
+
+      document.getElementById('gamePlay').classList.add('hidden');
+      document.getElementById('gameResult').style.display = 'block';
+      document.getElementById('finalScore').textContent = score;
+
+      // Save score
+      saveData('gameScore', score);
+
+      if (score >= 10) {
+        document.getElementById('gameMessage').textContent = 'You caught my heart \u2764\uFE0F';
+        document.getElementById('gameSubMessage').textContent = 'Knew you would.';
+      } else {
+        document.getElementById('gameMessage').textContent = 'You still stole my heart \uD83D\uDE2D\u2764\uFE0F';
+        document.getElementById('gameSubMessage').textContent = 'Even without trying...';
+      }
+    }
+
+    // Quiz
+    function submitQuiz() {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+
+      if (!q1 || !q2 || !q3) return;
+
+      // Save quiz answers
+      saveData('quizAnswers', {
+        overthinks: q1.parentElement.textContent.trim(),
+        argument: q2.parentElement.textContent.trim(),
+        perfectDay: q3.parentElement.textContent.trim()
+      });
+
+      document.getElementById('quizForm').style.display = 'none';
+      document.getElementById('quizResult').style.display = 'block';
+    }
+
+    // Truth
+    function submitTruth() {
+      const input = document.getElementById('truthInput');
+      const response = document.getElementById('truthResponse');
+      const btn = document.getElementById('truthBtn');
+
+      if (input.value.trim() === '') {
+        input.style.borderColor = 'rgba(233, 30, 99, 0.5)';
+        input.placeholder = 'Go ahead, ask me anything...';
+        setTimeout(() => {
+          input.style.borderColor = 'rgba(233, 30, 99, 0.15)';
+        }, 2000);
+        return;
+      }
+
+      // Save the question
+      saveData('truthQuestion', input.value.trim());
+
+      input.disabled = true;
+      input.style.opacity = '0.5';
+      btn.style.display = 'none';
+      response.style.display = 'block';
+
+      setTimeout(() => {
+        scrollToSection('photo');
+      }, 2500);
+    }
+
+    // Data storage & secret panel
+    function saveData(key, value) {
+      try {
+        const data = JSON.parse(localStorage.getItem('valentine_data') || '{}');
+        data[key] = value;
+        data.lastUpdated = new Date().toLocaleString();
+        localStorage.setItem('valentine_data', JSON.stringify(data));
+      } catch(e) {}
+    }
+
+    // SECRET: Triple-tap the music button to see her responses
+    let secretTaps = 0;
+    let secretTimer = null;
+
+    musicBtn.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      // Press Shift+H to open secret panel
+      if (e.shiftKey && e.key === 'H') {
+        openSecret();
+      }
+    });
+
+    // Also: tap music button 5 times quickly
+    let tapCount = 0;
+    let tapTimer = null;
+    musicBtn.addEventListener('click', () => {
+      tapCount++;
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => { tapCount = 0; }, 1500);
+      if (tapCount >= 5) {
+        tapCount = 0;
+        openSecret();
+      }
+    });
+
+    function openSecret() {
+      const panel = document.getElementById('secretPanel');
+      const dataDiv = document.getElementById('secretData');
+      let data = {};
+
+      try {
+        data = JSON.parse(localStorage.getItem('valentine_data') || '{}');
+      } catch(e) {}
+
+      let html = '';
+
+      if (data.gameScore !== undefined) {
+        html += '<div class="secret-item"><div class="label">Game Score</div><div class="value">' + data.gameScore + ' hearts caught</div></div>';
+      }
+
+      if (data.quizAnswers) {
+        html += '<div class="secret-item"><div class="label">Quiz - Who overthinks more?</div><div class="value">' + data.quizAnswers.overthinks + '</div></div>';
+        html += '<div class="secret-item"><div class="label">Quiz - Who wins arguments?</div><div class="value">' + data.quizAnswers.argument + '</div></div>';
+        html += '<div class="secret-item"><div class="label">Quiz - Perfect day?</div><div class="value">' + data.quizAnswers.perfectDay + '</div></div>';
+      }
+
+      if (data.truthQuestion) {
+        html += '<div class="secret-item"><div class="label">Her Question to You</div><div class="value">' + data.truthQuestion + '</div></div>';
+      }
+
+      if (!html) {
+        html = '<p class="no-data">No responses yet. She hasn\'t filled anything in.</p>';
+      }
+
+      if (data.lastUpdated) {
+        html += '<div class="secret-item"><div class="label">Last Updated</div><div class="value">' + data.lastUpdated + '</div></div>';
+      }
+
+      dataDiv.innerHTML = html;
+      panel.classList.add('active');
+    }
+
+    function closeSecret() {
+      document.getElementById('secretPanel').classList.remove('active');
+    }
+
+    // Initial landing fade-in
+    setTimeout(() => {
+      document.querySelector('#landing .fade-in').classList.add('visible');
+    }, 400);
+  </script>
+</body>
+</html>
